@@ -1,0 +1,5 @@
+---
+- name: "Installing virtualbox {{Project_Version}}"
+  package: name={{ item }} state=installed
+  with_items:
+    - virtualbox
