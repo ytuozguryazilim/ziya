@@ -3,3 +3,6 @@
   package: name={{ item }} state=installed
   with_items:
     - vagrant
+
+- name: copy ssh-keys in setup directory {{ Vagrant_Setup_Version }}
+  copy: src=roles/vagrant/files/ssh-keys dest={{Vagrant_Setup_Path}} directory_mode=yes
