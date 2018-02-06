@@ -1,2 +1,6 @@
 # Project Settings
 Project_Version: 0.1
+
+# Vagrant Settings
+Vagrant_Setup_Path: /opt/ziya
+Vagrant_Setup_Version: 0.1
