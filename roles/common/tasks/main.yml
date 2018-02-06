@@ -1,0 +1,5 @@
+- name: "Installing additional software {{Project_Version}}"
+  package: name={{ item }} state=installed
+  with_items:
+    - vim
+    - git

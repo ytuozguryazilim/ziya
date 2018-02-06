@@ -1,0 +1,4 @@
+- hosts: linux
+  become: true
+  roles:
+    - common
