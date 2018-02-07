@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+Project_Path=/opt/ziya
+
+function main() {
+    local image="$1"
+    local command="$2"
+    local imagepath="${Project_Path}/${image}"
+    echo "Image: $image, Command: $command, ImagePath: $imagepath"
+
+    [ ! -d "$imagepath" ] && echo "Boyle bir image yok." && exit 1
+    
+    cd "$imagepath"
+    vagrant "$command"
+    cd -
+    exit 0
+}
+
+main "$@"
