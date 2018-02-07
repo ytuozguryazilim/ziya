@@ -4,14 +4,14 @@
   with_items:
     - vagrant
 
-- name: copy ssh-keys in setup directory {{ Vagrant_Setup_Version }}
+- name: copy ssh-keys in setup directory
   copy: src=roles/vagrant/files/ssh-keys dest={{Vagrant_Setup_Path}} directory_mode=yes
 
 - name: copy ziya script in /usr/bin
   copy: src=roles/vagrant/files/ziya dest=/usr/bin/ziya mode=0755
 
-- name: create kali directory
-  file: path={{ Vagrant_Setup_Path }}/kali state=directory
+- name: create kali2017-2 directory
+  file: path={{ path_kali2017 }} state=directory
 
-- name: copy Vagrantfile of kalilinux in setup directory {{ Vagrant_Setup_Version }}
-  template: src=roles/vagrant/templates/Vagrantfile-kali.j2 dest={{Vagrant_Setup_Path}}/kali/Vagrantfile
+- name: copy Vagrantfile of kalilinux in setup directory
+  template: src=roles/vagrant/templates/Vagrantfile-kali.j2 dest={{ path_kali2017 }}/Vagrantfile
