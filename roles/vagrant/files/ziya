@@ -2,18 +2,38 @@
 
 Project_Path=/opt/ziya
 
-function main() {
-    local image="$1"
-    local command="$2"
-    local imagepath="${Project_Path}/${image}"
-    echo "Image: $image, Command: $command, ImagePath: $imagepath"
-
-    [ ! -d "$imagepath" ] && echo "Boyle bir image yok." && exit 1
-    
-    cd "$imagepath"
-    vagrant "$command"
-    cd -
-    exit 0
+function ziya_help() {
+    echo "Help page"
 }
 
-main "$@"
+function ziya_main() {
+    local tool="$1"
+
+    case "$tool" in
+        help | --help | -h )
+            ziya_help
+        ;;
+        vagrant | --vagrant )
+            local image="$2"
+            local command="$3"
+            local imagepath="${Project_Path}/${image}"
+            echo "Image: $image, Command: $command, ImagePath: $imagepath"
+
+            [ ! -d "$imagepath" ] && echo "Boyle bir image yok." && exit 1
+    
+            cd "$imagepath"
+            vagrant "$command"
+            cd -
+        ;;
+        virtualbox | --virtualbox )
+            virtualbox &
+        ;;
+        * )
+            ziya_help
+        ;;
+    esac
+
+}
+
+ziya_main "$@"
+exit 0
