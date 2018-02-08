@@ -1,0 +1,7 @@
+---
+__kvm_packages:
+  - qemu-kvm
+  - libvirt-bin
+  - ubuntu-vm-builder
+  - bridge-utils
+  - virt-manager

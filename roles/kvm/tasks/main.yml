@@ -1,0 +1,28 @@
+---
+- name: include OS-specific packages for Ubuntu
+  include_vars: "{{ ansible_distribution }}.yml"
+  when: ansible_distribution == 'Ubuntu'
+
+- name: include OS-specific packages for Arch.
+  include_vars: "{{ ansible_distribution }}.yml"
+  when: ansible_distribution == 'Archlinux'
+
+- name: define kvm_packages.
+  set_fact:
+    kvm_packages: "{{ __kvm_packages | list }}"
+  when: kvm_packages is not defined
+
+- name: kvm_packages
+  debug: var=kvm_packages
+
+# Setup/install tasks
+- name: install kvm packages
+  package: name={{ item }} state=present
+  with_items: "{{kvm_packages}}"
+  notify:
+    - enable_libvirtd_service
+
+- name: restart libvirtd service
+  service:
+    name: libvirtd
+    state: restarted

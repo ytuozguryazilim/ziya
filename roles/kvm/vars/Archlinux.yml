@@ -1,0 +1,5 @@
+---
+__kvm_packages:
+  - qemu
+  - libvirt
+  - virt-manager

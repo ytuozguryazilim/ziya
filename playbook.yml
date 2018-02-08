@@ -3,4 +3,5 @@
   roles:
     - common
     - virtualbox
+    - kvm
     - vagrant
