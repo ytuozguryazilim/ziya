@@ -1,5 +1,11 @@
+- name: Update apt cache
+  apt: update_cache=yes
+  when: ansible_distribution == 'Ubuntu'
+
 - name: "Installing additional software {{Project_Version}}"
-  package: name={{ item }} state=installed
+  package:
+    name: "{{ item }}"
+    state: installed
   with_items:
     - vim
     - git
