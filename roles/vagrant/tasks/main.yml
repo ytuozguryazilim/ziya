@@ -1,17 +1,29 @@
 ---
 - name: "Installing vagrant {{Project_Version}}"
-  package: name={{ item }} state=installed
+  package:
+    name: "{{ item }}"
+    state: installed
   with_items:
     - vagrant
 
-- name: copy ssh-keys in setup directory
-  copy: src=roles/vagrant/files/ssh-keys dest={{Vagrant_Setup_Path}} directory_mode=yes
-
 - name: copy ziya script in /usr/bin
-  copy: src=roles/vagrant/files/ziya dest=/usr/bin/ziya mode=0755
+  copy:
+    src: ziya
+    dest: /usr/bin/ziya
+    mode: 0755
 
 - name: create kali2017-2 directory
-  file: path={{ path_kali2017 }} state=directory
+  file:
+    path: "{{ path_kali2017 }}"
+    state: directory
 
-- name: copy Vagrantfile of kalilinux in setup directory
-  template: src=roles/vagrant/templates/Vagrantfile-kali.j2 dest={{ path_kali2017 }}/Vagrantfile
+- name: copy ssh-keys in path_kali2017 directory
+  copy:
+    src: ssh-keys
+    dest: "{{ path_kali2017 }}"
+    directory_mode: yes
+
+- name: copy Vagrantfile of kalilinux in path_kali2017 directory
+  template:
+    src: Vagrantfile-kali.j2
+    dest: "{{ path_kali2017 }}/Vagrantfile"
